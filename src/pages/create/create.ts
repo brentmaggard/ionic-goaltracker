@@ -8,7 +8,7 @@ import {
           AlertController,
           Alert
         } from 'ionic-angular';
-import { formGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FirestoreProvider } from '../../providers/firestore/firestore';
 
 /**
@@ -50,10 +50,10 @@ public createGameForm: FormGroup;
     const gameDate = this.createGameForm.value.gameDate;
     const who = this.createGameForm.value.who;
 
-    this.FirestoreProvider
+    this.firestoreProvider
       .createGame(gameDate, who)
       .then(
-        ()=> {
+        () => {
           loading.dismiss().then(() => {
             this.navCtrl.pop();
           });
@@ -62,7 +62,7 @@ public createGameForm: FormGroup;
           loading.dismiss().then(() => {
             const alert: Alert = this.alertCtrl.create({
               message: error.message,
-              buttons: [{ text: 'Ok', role: 'cancel' }],
+              buttons: [{ text: 'Ok', role: 'cancel' }]
             });
             alert.present();
           });

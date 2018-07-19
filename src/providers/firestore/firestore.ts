@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Goal } from '../../models/goals.interface';
 
 /*
   Generated class for the FirestoreProvider provider.
@@ -9,9 +10,23 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class FirestoreProvider {
+  constructor(public firestore: AngularFirestore) {}
 
-  constructor(public http: HttpClient) {
-    console.log('Hello FirestoreProvider Provider');
+  createGame(
+    gameDate: Date,
+    who: string
+  ): Promise<void> {
+    const id = this.firestore.createId();
+
+    return this.firestore.doc('goals/' + id).set({
+      id,
+      gameDate,
+      who,
+    });
+  }
+
+  getGameList() : AngularFirestoreCollection<Goal> {
+    return this.firestore.collection('goals');
   }
 
 }
