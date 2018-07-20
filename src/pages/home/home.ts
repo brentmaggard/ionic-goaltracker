@@ -10,16 +10,24 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomePage {
 
-  public goalsList: Observable<Goal[]>;
+  public gameList: Observable<Goal[]>;
 
-  constructor(public navCtrl: NavController
+  constructor(public navCtrl: NavController,
               public firestoreProvider: FirestoreProvider
             ) {}
-
-  }
 
   goToCreatePage(): void {
     this.navCtrl.push('CreatePage');
   }
+
+
+  ionViewDidLoad() {
+    this.gameList = this.firestoreProvider.getGameList().valueChanges();
+  }
+
+goToDetailPage(game: Goal): void {
+  this.navCtrl.push('DetailPage', { game: game });
+}
+
 
 }

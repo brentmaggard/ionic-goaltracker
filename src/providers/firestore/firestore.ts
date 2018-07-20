@@ -29,4 +29,8 @@ export class FirestoreProvider {
     return this.firestore.collection('goals');
   }
 
+  deleteGame(gameId: string): Promise<void> {
+  return this.firestore.doc(`goals/${gameId}`).delete();
+}
+
 }

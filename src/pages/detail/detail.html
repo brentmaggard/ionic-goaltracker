@@ -7,12 +7,19 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Detail</ion-title>
+    <ion-title>{{ game.gameDate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <h3> Who </h3>
+    <p>
+     {{ game.who }}
+    </p>
 
+    <button ion-button block (click)="deleteGame(game.id, game.gameDate)">
+    DELETE GAME
+  </button>
 </ion-content>
